@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def twoClass():
     # 2class linear discriminant
     N = 1000
@@ -29,6 +30,8 @@ def twoClass():
     plt.scatter(x2[:, 0], x2[:, 1])
 
     plt.show()
+
+
 def threeClass():
     # 4class linear discriminant
     N = 100
@@ -40,8 +43,8 @@ def threeClass():
     # sigma must be varience covariance matrix
     sigma1 = np.array([[1.0, 0.0], [0.0, 10.0]]) * 0.1 * 2
     sigma2 = np.array([[10.0, 3.0], [3.0, 10.0]]) * 0.1
-    sigma3 = np.array([[1.0, 2.0], [2.0, 10.0]]) * 0.1 
-    sigma4 = np.array([[10.0, 0.0], [0.0, 10.0]]) * 0.1 
+    sigma3 = np.array([[1.0, 2.0], [2.0, 10.0]]) * 0.1
+    sigma4 = np.array([[10.0, 0.0], [0.0, 10.0]]) * 0.1
     # class data
     x1 = np.random.multivariate_normal(m1, sigma1, N)
     x2 = np.random.multivariate_normal(m2, sigma2, N)
@@ -56,21 +59,22 @@ def threeClass():
     y = np.linspace(-5, 5, 300)
     xx, yy = np.meshgrid(x, y)
     X = np.c_[np.ravel(xx), np.ravel(yy)]
+
     def calcweight(m, sigma):
         sigmaInv = np.linalg.inv(sigma)
         return [np.dot(sigmaInv, m), -0.5 * np.dot(m, np.dot(sigmaInv, m)) + np.log(1 / 4.0)]
 
-    w1 , w10 = calcweight(m1, sigma1)
-    a1 = np.dot(w1[np.newaxis], X.T) .reshape(300, 300) + w10
+    w1, w10 = calcweight(m1, sigma1)
+    a1 = np.dot(w1[np.newaxis], X.T).reshape(300, 300) + w10
 
-    w2 , w20 = calcweight(m2, sigma2)
+    w2, w20 = calcweight(m2, sigma2)
     a2 = np.dot(w2[np.newaxis], X.T).reshape(300, 300) + w20
 
-    w3 , w30 = calcweight(m3, sigma3)
-    a3 = np.dot(w3[np.newaxis], X.T) .reshape(300, 300) + w30
+    w3, w30 = calcweight(m3, sigma3)
+    a3 = np.dot(w3[np.newaxis], X.T).reshape(300, 300) + w30
 
-    w4 , w40 = calcweight(m4, sigma4)
-    a4 = np.dot(w4[np.newaxis], X.T) .reshape(300, 300) + w40
+    w4, w40 = calcweight(m4, sigma4)
+    a4 = np.dot(w4[np.newaxis], X.T).reshape(300, 300) + w40
 
     p1 = np.exp(a1) / (np.exp(a1) + np.exp(a2) + np.exp(a3) + np.exp(a4))
     p2 = np.exp(a2) / (np.exp(a1) + np.exp(a2) + np.exp(a3) + np.exp(a4))
@@ -92,6 +96,5 @@ def threeClass():
     mlab.surf(p4 * 100)
     mlab.show()
 
+
 threeClass()
-
-
