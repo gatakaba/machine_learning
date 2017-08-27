@@ -7,7 +7,7 @@ def twoClass():
     N = 1000
     m1 = np.array([-5, 0])
     m2 = np.array([2, -5])
-    sigma = np.array([[0.5, -2], [-2, 0.5]])
+    sigma = np.array([[2, 1], [1, 2]])
 
     # class1 data
     x1 = np.random.multivariate_normal(m1, sigma, N)
@@ -89,12 +89,6 @@ def threeClass():
     plt.scatter(x4[:, 0], x4[:, 1], c="yellow")
     plt.show()
 
-    from mayavi import mlab
-    mlab.surf(p1 * 100)
-    mlab.surf(p2 * 100)
-    mlab.surf(p3 * 100)
-    mlab.surf(p4 * 100)
-    mlab.show()
 
-
-threeClass()
+if __name__ == '__main__':
+    twoClass()
